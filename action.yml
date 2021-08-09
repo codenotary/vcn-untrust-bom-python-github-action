@@ -32,6 +32,4 @@ runs:
     - ${{ inputs.cnil_grpc_port }}
     - --lc-api-key
     - ${{ inputs.cnil_api_key }}
-    - --signerID
-    - ${{ inputs.signer_id }}
     - --bom
