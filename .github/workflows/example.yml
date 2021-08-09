@@ -11,7 +11,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Authenticate Python project with BoM
+      - name: Untrust a Python project with BoM
         #--> Run the GitHub action
         uses: codenotary/vcn-untrust-bom-python-github-action@v1.0.0
         # uses: codenotary/vcn-untrust-bom-python-github-action@main
@@ -20,11 +20,6 @@ jobs:
           cnil_host: ${{ secrets.CNIL_HOST }}
           cnil_grpc_port: ${{ secrets.CNIL_GRPC_PORT }}
           cnil_api_key: ${{ secrets.CNIL_API_KEY }}
-          # the signer ID is always required (even if it's the same as the one of the CNIL API key)
-          # - hardcode it here
-          signer_id: OggVCNAPIKey1
-          # - or pick it from the event:
-          # signer_id: ${{ github.event.sender.login }}@github
         #<--
         #--> or run the vcn Docker image directly (all vcn flags are available and passed through)
         # for Python 2:
