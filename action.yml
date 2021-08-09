@@ -1,0 +1,37 @@
+name: 'VCN untrust BoM for Python projects'
+description: 'Uses the vcn tool from CodeNotary.com to untrust the bill of materials (BoM) for Python projects.'
+branding:
+  icon: 'check-square'
+  color: 'green'
+inputs:
+  asset:
+    description: 'Asset to untrust.'
+    required: true
+  cnil_host:
+    description: 'CodeNotary Immutable Ledger (CNIL) host.'
+    required: true
+  cnil_grpc_port:
+    description: 'CNIL gRPC port.'
+    required: false
+    default: 443
+  cnil_api_key:
+    description: 'CNIL API key.'
+    required: true
+  signer_id:
+    description: 'CNIL signer ID.'
+    required: true
+runs:
+  using: 'docker'
+  image: 'docker://codenotary/vcn:bom-python3'
+  args:
+    - untrust
+    - ${{ inputs.asset }}
+    - --lc-host
+    - ${{ inputs.cnil_host }}
+    - --lc-port
+    - ${{ inputs.cnil_grpc_port }}
+    - --lc-api-key
+    - ${{ inputs.cnil_api_key }}
+    - --signerID
+    - ${{ inputs.signer_id }}
+    - --bom
